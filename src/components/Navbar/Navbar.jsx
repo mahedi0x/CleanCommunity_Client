@@ -35,7 +35,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl shadow-md w-full">
+    <nav className="sticky top-0 z-50 bg-white/50 backdrop-blur-sm shadow-md w-full px-5">
       <div className="max-w-9xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -50,7 +50,10 @@ const Navbar = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-3">
-          {user ? (
+          {user ? 
+          
+          (
+
             <div className="relative group">
               <img
                 src={user?.photoURL || 'placeholder.png'}
@@ -59,8 +62,8 @@ const Navbar = () => {
               />
 
               {/* Dropdown */}
-              <div className="absolute right-0 mt-3 w-48 bg-white shadow-lg rounded-xl p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none group-hover:pointer-events-auto">
-                <p className="font-semibold text-[#2e4a33]">{user?.displayName}</p>
+              <div className="absolute right-0  w-58 bg-white shadow-lg  rounded-xl p-3 opacity-0 group-hover:opacity-100 transition-all duration-600 pointer-events-none group-hover:pointer-events-auto">
+                <p className="font-semibold text-[#2e4a33] py-3">{user?.displayName}</p>
                 <p className="text-sm text-gray-600">{user?.email}</p>
                 <div className="border-t my-2"></div>
                 <button
@@ -70,8 +73,11 @@ const Navbar = () => {
                   Logout
                 </button>
               </div>
+
             </div>
-          ) : (
+          ) 
+
+          : (
             <div className="hidden lg:flex gap-3">
               <Link to="/login" className="sign btn btn-outline md:px-10 border-green-700 text-green-800 hover:bg-[#2e4a33] hover:text-white cursor-pointer"
               >Login</Link>
@@ -85,6 +91,7 @@ const Navbar = () => {
             {open ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
+        
       </div>
 
       {/* Mobile Menu */}
