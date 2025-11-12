@@ -4,8 +4,8 @@ import { Link } from 'react-router';
 
 const IssueCard = ({issue}) => {
     const {_id, title, category, location, description, image, date } = issue;
-    console.log(issue);
-    console.log(_id);
+    // console.log(issue);
+    // console.log(_id);
    
 
 
