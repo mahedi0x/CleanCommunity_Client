@@ -1,9 +1,12 @@
 import React, { use } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import { toast } from "react-toastify";
+import useAxios from "../../hooks/useAxios";
+
 
 const AddIssue = () => {
   const { user } = use(AuthContext);
+  const axiosInstance = useAxios();
 
   const handleAddIssues = (e) => {
     e.preventDefault();
@@ -20,22 +23,14 @@ const AddIssue = () => {
       created_by: user.email,
     };
     console.log(formData);
+    
 
-    fetch("http://localhost:3000/issues", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+    axiosInstance.post("/issues", formData)
+    .then(data => {
+      console.log(data.data);
+      toast.success("Add Issues")
+      e.target.reset();
     })
-      .then((res) => res.json())
-      .then((data) => {
-        toast.success("Successfully added!");
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
 
@@ -188,12 +183,10 @@ const AddIssue = () => {
         <div className="text-center mt-8">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md transition-transform transform hover:scale-105"
+            className="bg-green-800 w-full hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md"
           >
             Submit Issue
           </button>
-
-
           
         </div>
       </form>
