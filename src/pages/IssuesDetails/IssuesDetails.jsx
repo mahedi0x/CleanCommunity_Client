@@ -141,16 +141,6 @@ const handlePayContributionSubmit = (e) => {
               <FaMoneyBillWave className="text-4xl text-green-500" />
             </div>
 
-            {/* Pay Contribution Button */}
-            {/* <button 
-              className="w-full bg-green-600 text-white text-lg font-bold py-3 px-5 rounded-lg
-                         hover:bg-green-700 transition-all duration-300 shadow-md
-                         focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
-              onClick={() => alert('Redirecting to payment...')}
-            >
-              Pay Clean-Up Contribution
-            </button> */}
-
             <div>
 
              <button  onClick={handlePayContributionModalOpen}
@@ -161,146 +151,150 @@ const handlePayContributionSubmit = (e) => {
             >
               Pay Clean-Up Contribution
             </button> 
-{/* 
-                    <dialog ref={payContributionModalRef} className="modal modal-bottom sm:modal-middle">
-                        <div className="modal-box">
-                            <h3 className="font-bold text-lg">Give the best offer!</h3>
-                            <p className="py-4">Offer something seller can not resist</p>
-                            <form onSubmit={handlePayContributionSubmit}>
-                                <fieldset className="fieldset">
-                                    <label className="label">Name</label>
-                                    <input type="text" name='name' className="input"
-                                        readOnly
-                                        defaultValue={user?.displayName} />
-                                   
-                                    <label className="label">Email</label>
-                                    <input type="email" className="input" name='email' readOnly defaultValue={user?.email} />
-                                 
-                                    <label className="label">Bid</label>
-                                    <input type="text" name='bid' className="input"
-                                        placeholder='Your Bid'
-                                    />
-                                    <button className="btn btn-neutral mt-4">Please your bid</button>
-                                </fieldset>
-                            </form>
-
-                            <div className="modal-action">
-                                <form method="dialog">
-                                    
-                                    <button className="btn">Cancel</button>
-                                </form>
-                            </div>
-                        </div>
-                    </dialog> */}
-
 
 
 <dialog ref={payContributionModalRef} className="modal modal-bottom sm:modal-middle">
-  <div className="modal-box bg-white rounded-2xl shadow-xl">
-    <h3 className="font-bold text-2xl text-center text-gray-800 mb-2">
-      💚 Pay Clean-Up Contribution
-    </h3>
-    <p className="text-center text-gray-500 mb-6">
-      Help restore the community by contributing to this clean-up effort.
-    </p>
+  <div className="modal-box bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-lg">
+    
+    <div className="text-center mb-6">
+    
+      <h3 className="font-extrabold text-3xl text-gray-800">
+        Clean-Up Contribution
+      </h3>
+      <p className="text-gray-500 mt-2">
+        Your generosity helps restore and maintain the community.
+      </p>
+    </div>
 
-    <form onSubmit={handlePayContributionSubmit} className="space-y-3">
-      <fieldset className="fieldset space-y-3">
-        {/* Issue Title */}
-        <label className="label font-medium text-gray-700">Issue Title</label>
-        <input
-          type="text"
-          name="issueTitle"
-          className="input input-bordered w-full bg-gray-100 text-gray-700"
-          readOnly
-        //   defaultValue={selectedIssue?.title || ""}
-        />
+    <form onSubmit={handlePayContributionSubmit} className="space-y-6">
+      <fieldset className="fieldset space-y-2">
+        
+        {/* Contribution Details Group (Read-Only) */}
+        <div className=" rounded-lg ">
+          <h4 className="text-2xl font-bold text-green-700 mb-3 text-center">Contribution Details</h4>
+          
+          {/* Issue Title */}
+          <div className="form-control mb-3">
+            <label className="label text-sm font-semibold text-gray-700">Issue Title</label>
+            <input
+              type="text"
+              name="issueTitle"
+              
+              className="input input-bordered w-full  text-green-800 font-medium"
+              readOnly
+              // defaultValue={selectedIssue?.title || ""}
+            />
+          </div>
 
-        {/* Amount */}
-        <label className="label font-medium text-gray-700">Amount</label>
-        <input
-          type="number"
-          name="amount"
-          className="input input-bordered w-full bg-gray-100 text-gray-700"
-          readOnly
-        //   defaultValue={selectedIssue?.amount || ""}
-        />
+          {/* Amount */}
+          <div className="form-control">
+            <label className="label text-sm font-semibold text-gray-700">Contribution Amount</label>
+            <input
+              type="text"
+              name="amount"
+              className="input input-bordered w-full  text-green-800 font-bold text-xl"
+              readOnly
+              // defaultValue={`$${selectedIssue?.amount || "0.00"}`} // Format as currency
+            />
+          </div>
+        </div>
+        
+        {/* CONTACT INFORMATION GROUP - NOW TWO COLUMNS */}
+        <div className="space-y-2 ">
+          <h4 className="text-lg font-bold text-gray-700">Your Contact Information</h4>
 
-        {/* Contributor Name */}
-        <label className="label font-medium text-gray-700">Contributor Name</label>
-        <input
-          type="text"
-          name="contributorName"
-          className="input input-bordered w-full"
-          placeholder="Enter your name"
-          required
-        />
+          <div className="">
+              
+            {/* Contributor Name (Column 1) */}
+            <div className="form-control">
+              <label className="label text-sm font-semibold text-gray-700 ">Your Name</label>
+              <input
+                type="text"
+                name="contributorName"
+                className="input input-bordered w-full"
+                placeholder="Enter Your Name"
+                required
+              />
+            </div>
 
-        {/* Email */}
-        <label className="label font-medium text-gray-700">Email</label>
-        <input
-          type="email"
-          name="email"
-          className="input input-bordered w-full bg-gray-100 text-gray-700"
-          readOnly
-          defaultValue={user?.email}
-        />
+            {/* Phone number (Column 2) */}
+            <div className="form-control">
+              <label className="label text-sm font-semibold text-gray-700 mt-3">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                className="input input-bordered w-full"
+                placeholder="Phone Number"
+                required
+              />
+            </div>
+          </div>
+          
+          {/* Email (Full Width) */}
+          <div className="form-control">
+            <label className="label text-sm font-semibold text-gray-700">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              className="input input-bordered w-full bg-gray-100 text-gray-700"
+              readOnly
+              defaultValue={user?.email}
+            />
+          </div>
 
-        {/* Phone number */}
-        <label className="label font-medium text-gray-700">Phone Number</label>
-        <input
-          type="tel"
-          name="phone"
-          className="input input-bordered w-full"
-          placeholder="Enter your phone number"
-          required
-        />
+          {/* Address (Full Width) */}
+          <div className="form-control">
+            <label className="label text-sm font-semibold text-gray-700">Full Address</label>
+            <input
+              type="text"
+              name="address"
+              className="input input-bordered w-full"
+              placeholder="Street, City, Zip"
+              required
+            />
+          </div>
+        </div>
 
-        {/* Address */}
-        <label className="label font-medium text-gray-700">Address</label>
-        <input
-          type="text"
-          name="address"
-          className="input input-bordered w-full"
-          placeholder="Enter your address"
-          required
-        />
+        {/* Optional/System Info Group */}
+        <div className="space-y-4">
+           
+           {/* Date (Read-Only) */}
+          <div className="form-control">
+            <label className="label text-sm font-semibold text-gray-700">Transaction Date</label>
+            <input
+              type="text"
+              name="date"
+              className="input input-bordered w-full bg-gray-100 text-gray-600"
+              readOnly
+              value={new Date().toLocaleDateString()}
+            />
+          </div>
 
-        {/* Date */}
-        <label className="label font-medium text-gray-700">Date</label>
-        <input
-          type="text"
-          name="date"
-          className="input input-bordered w-full bg-gray-100 text-gray-700"
-          readOnly
-          value={new Date().toLocaleDateString()}
-        />
-
-        {/* Additional Info */}
-        <label className="label font-medium text-gray-700">Additional Info</label>
-        <textarea
-          name="additionalInfo"
-          className="textarea textarea-bordered w-full h-24"
-          placeholder="Any additional information (optional)"
-        ></textarea>
-
-        {/* Submit Button */}
-        <button className="btn btn-success w-full mt-4 text-white text-base font-semibold">
-          Confirm Contribution
-        </button>
+          {/* Additional Info */}
+          <div className="form-control">
+            <label className="label text-sm font-semibold text-gray-700">Notes (Optional)</label>
+            <textarea
+              name="additionalInfo"
+              className="textarea textarea-bordered w-full h-20"
+              placeholder="Any message or additional info for the clean-up team..."
+            ></textarea>
+          </div>
+        </div>
       </fieldset>
+
+      {/* Submit Button */}
+      <button className="btn w-full text-lg font-bold text-white bg-green-600 hover:bg-green-700 border-green-600 hover:border-green-700 transition duration-150 ease-in-out shadow-lg shadow-green-200 ">
+        Confirm & Pay Contribution
+      </button>
     </form>
 
-    <div className="modal-action mt-2">
+    <div className="modal-action justify-center mt-4 pt-2">
       <form method="dialog">
-        <button className="btn btn-outline">Cancel</button>
+        <button className="btn btn-ghost text-gray-500 hover:text-gray-700">Cancel</button>
       </form>
     </div>
   </div>
 </dialog>
-
-
-
 
 
 
