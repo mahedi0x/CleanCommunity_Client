@@ -10,6 +10,7 @@ import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Home from '../pages/Home/Home';
+import IssuesDetails from '../pages/IssuesDetails/IssuesDetails';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
             {
                 path: "/my-issues",
                 element: <MyIssues></MyIssues>
+            },
+            {
+                path: "/issues-details/:id",
+                element: <IssuesDetails></IssuesDetails>,
+                loader: ({params}) => fetch(`http://localhost:3000/issues-details/${params.id}`)
             },
             {
                 path: "/my-contribution",

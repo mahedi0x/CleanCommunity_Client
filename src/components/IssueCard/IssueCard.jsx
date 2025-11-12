@@ -1,8 +1,12 @@
 import React from 'react';
 import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const IssueCard = ({issue}) => {
-    const { title, category, location, description, image, date } = issue;
+    const {_id, title, category, location, description, image, date } = issue;
+    console.log(issue);
+    console.log(_id);
+   
 
 
   const formattedDate = new Date(date).toLocaleDateString('en-US', {
@@ -47,9 +51,10 @@ const IssueCard = ({issue}) => {
           {description}
         </p>
         
-        <button className="w-full bg-green-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300">
+        
+        <Link to={`/issues-details/${_id}`} className="w-full bg-green-700 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-600 transition duration-300">
           View Details
-        </button>
+        </Link>
       </div>
     </div>
     );

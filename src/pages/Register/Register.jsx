@@ -58,16 +58,46 @@ const Register = () => {
     };
 
   
+    // const handleGoogleSignIn = () => {
+    //   createUserByGoogle()
+    //   .then(result =>{
+    //     console.log(result.user);
+    //     navigate("/");
+    //   })
+    //   .catch(error =>{
+    //     console.log(error.message);
+    //   })
+    // };
+
     const handleGoogleSignIn = () => {
       createUserByGoogle()
-      .then(result =>{
-        console.log(result.user);
-        navigate("/");
-      })
-      .catch(error =>{
-        console.log(error.message);
-      })
-    };
+          .then(result => {
+              console.log(result.user);
+              navigate("/");
+              const newUser = {
+                  name: result.user.displayName,
+                  email: result.user.email,
+                  image: result.user.photoURL
+              }
+
+              // create user in the database
+              fetch('http://localhost:3000/users',{
+                  method: 'POST',
+                  headers: {
+                      'content-type': 'application/json'
+                  },
+                  body: JSON.stringify(newUser)
+              })
+                  .then(res => res.json())
+                  .then(data => {
+                      console.log('data after user save', data)
+                  })
+
+          })
+          .catch(error => {
+              console.log(error)
+          })
+  }
   
 
     const togglePasswordVisibility = () => {
@@ -81,11 +111,11 @@ const Register = () => {
           {/* Header */}
           <div className="text-center mb-4">
             <h2 className="text-3xl font-bold text-[#2e4a33]">
-              Welcome GreenNest.
+              Welcome CleanBD.
               
             </h2>
             <p className="text-gray-600 my-2">
-            Create Your GreenNest Account.
+            Create Your CleanBD Account.
             </p>
           </div>
   
