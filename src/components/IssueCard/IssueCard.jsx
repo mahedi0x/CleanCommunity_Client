@@ -3,17 +3,23 @@ import { FaMapMarkerAlt, FaCalendarAlt } from 'react-icons/fa';
 import { Link } from 'react-router';
 
 const IssueCard = ({issue}) => {
-    const {_id, title, category, location, description, image, date } = issue;
-    // console.log(issue);
+    const {_id, title, category, location, description, image, created_at } = issue;
+    // console.log(created_at);
     // console.log(_id);
    
 
+    // const formattedDate = created_at?.split('T')[0];
+    const formattedDate = created_at ? new Date(created_at).toISOString().split('T')[0] : '';
 
-  const formattedDate = new Date(date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+
+
+  // const formattedDate = new Date(created_at).toLocaleDateString('en-US', {
+  //   year: 'numeric',
+  //   month: 'long',
+  //   day: 'numeric',
+  // });
+  // const formattedDate = new Date(created_at).toISOString().split('T')[0];
+  console.log(formattedDate);
 
 
     return (

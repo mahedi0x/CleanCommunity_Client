@@ -10,10 +10,6 @@ const IssueDetails = () => {
   const issue = useLoaderData();
   const payContributionModalRef = useRef(null);
 
-
-
-
-
   const handlePayContributionModalOpen = () => {
     payContributionModalRef.current.showModal();
 }
