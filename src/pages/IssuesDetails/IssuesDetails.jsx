@@ -1,6 +1,6 @@
 import React, { use, useRef } from 'react';
 // Using react-icons for a clean look
-import { FaMapMarkerAlt, FaCalendarAlt, FaMoneyBillWave, FaTag } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCalendarAlt, FaMoneyBillWave, FaTag, FaTimes, FaDollarSign } from 'react-icons/fa';
 import { useLoaderData } from 'react-router';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
 
@@ -161,7 +161,7 @@ const handlePayContributionSubmit = (e) => {
             >
               Pay Clean-Up Contribution
             </button> 
-
+{/* 
                     <dialog ref={payContributionModalRef} className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">
                             <h3 className="font-bold text-lg">Give the best offer!</h3>
@@ -172,10 +172,10 @@ const handlePayContributionSubmit = (e) => {
                                     <input type="text" name='name' className="input"
                                         readOnly
                                         defaultValue={user?.displayName} />
-                                    {/* email */}
+                                   
                                     <label className="label">Email</label>
                                     <input type="email" className="input" name='email' readOnly defaultValue={user?.email} />
-                                    {/* bid amount */}
+                                 
                                     <label className="label">Bid</label>
                                     <input type="text" name='bid' className="input"
                                         placeholder='Your Bid'
@@ -186,12 +186,126 @@ const handlePayContributionSubmit = (e) => {
 
                             <div className="modal-action">
                                 <form method="dialog">
-                                    {/* if there is a button in form, it will close the modal */}
+                                    
                                     <button className="btn">Cancel</button>
                                 </form>
                             </div>
                         </div>
-                    </dialog>
+                    </dialog> */}
+
+
+
+<dialog ref={payContributionModalRef} className="modal modal-bottom sm:modal-middle">
+  <div className="modal-box bg-white rounded-2xl shadow-xl">
+    <h3 className="font-bold text-2xl text-center text-gray-800 mb-2">
+      💚 Pay Clean-Up Contribution
+    </h3>
+    <p className="text-center text-gray-500 mb-6">
+      Help restore the community by contributing to this clean-up effort.
+    </p>
+
+    <form onSubmit={handlePayContributionSubmit} className="space-y-3">
+      <fieldset className="fieldset space-y-3">
+        {/* Issue Title */}
+        <label className="label font-medium text-gray-700">Issue Title</label>
+        <input
+          type="text"
+          name="issueTitle"
+          className="input input-bordered w-full bg-gray-100 text-gray-700"
+          readOnly
+        //   defaultValue={selectedIssue?.title || ""}
+        />
+
+        {/* Amount */}
+        <label className="label font-medium text-gray-700">Amount</label>
+        <input
+          type="number"
+          name="amount"
+          className="input input-bordered w-full bg-gray-100 text-gray-700"
+          readOnly
+        //   defaultValue={selectedIssue?.amount || ""}
+        />
+
+        {/* Contributor Name */}
+        <label className="label font-medium text-gray-700">Contributor Name</label>
+        <input
+          type="text"
+          name="contributorName"
+          className="input input-bordered w-full"
+          placeholder="Enter your name"
+          required
+        />
+
+        {/* Email */}
+        <label className="label font-medium text-gray-700">Email</label>
+        <input
+          type="email"
+          name="email"
+          className="input input-bordered w-full bg-gray-100 text-gray-700"
+          readOnly
+          defaultValue={user?.email}
+        />
+
+        {/* Phone number */}
+        <label className="label font-medium text-gray-700">Phone Number</label>
+        <input
+          type="tel"
+          name="phone"
+          className="input input-bordered w-full"
+          placeholder="Enter your phone number"
+          required
+        />
+
+        {/* Address */}
+        <label className="label font-medium text-gray-700">Address</label>
+        <input
+          type="text"
+          name="address"
+          className="input input-bordered w-full"
+          placeholder="Enter your address"
+          required
+        />
+
+        {/* Date */}
+        <label className="label font-medium text-gray-700">Date</label>
+        <input
+          type="text"
+          name="date"
+          className="input input-bordered w-full bg-gray-100 text-gray-700"
+          readOnly
+          value={new Date().toLocaleDateString()}
+        />
+
+        {/* Additional Info */}
+        <label className="label font-medium text-gray-700">Additional Info</label>
+        <textarea
+          name="additionalInfo"
+          className="textarea textarea-bordered w-full h-24"
+          placeholder="Any additional information (optional)"
+        ></textarea>
+
+        {/* Submit Button */}
+        <button className="btn btn-success w-full mt-4 text-white text-base font-semibold">
+          Confirm Contribution
+        </button>
+      </fieldset>
+    </form>
+
+    <div className="modal-action mt-2">
+      <form method="dialog">
+        <button className="btn btn-outline">Cancel</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+
+
+
+
+
+
+
                 </div>
             
           </div>
