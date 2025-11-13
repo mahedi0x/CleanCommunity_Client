@@ -1,14 +1,7 @@
-// import "react-data-grid/lib/styles.css";
-// import { DataGrid } from "react-data-grid";
-// import jsPDF from "jspdf";
-// import "jspdf-autotable";
-
 import "react-data-grid/lib/styles.css";
 import { DataGrid } from "react-data-grid";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable"; // ✅ correct import
-
-
 
 
 const Table = ({ myContribution }) => {
@@ -35,7 +28,7 @@ const Table = ({ myContribution }) => {
     const tableColumn = columns.map((col) => col.name);
     const tableRows = rows.map((row) => columns.map((col) => row[col.key]));
   
-    autoTable(doc, { // ✅ call the plugin like this
+    autoTable(doc, { 
       head: [tableColumn],
       body: tableRows,
     });

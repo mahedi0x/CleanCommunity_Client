@@ -25,6 +25,10 @@ const AllIssues = () => {
       })
   }, [axiosInstance, category, status]);
 
+  if(loading){
+    <p>Loading ....</p>
+  }
+
   console.log(allIssues);
   return (
     <div>
@@ -35,7 +39,7 @@ const AllIssues = () => {
 
 
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-10 py-10 container mx-auto mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-10 py-10 container mx-auto">
         {
             allIssues.length === 0 ? <p>Issue Not Found</p> : <>{allIssues.map((issue) => (
                 <IssueCard issue={issue}></IssueCard>

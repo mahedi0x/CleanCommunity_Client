@@ -3,6 +3,7 @@ import IssueCategoryCards from '../../components/IssueCategoryCards/IssueCategor
 import Banner from '../../components/Banner/Banner';
 import LatestIssues from '../../components/latestIssues/latestIssues';
 import CommunityStates from '../../components/CommunityStates/CommunityStates';
+import CallAction from '../../components/CallAction/CallAction';
 
 const latestIssuesPromise = fetch('http://localhost:3000/latest-issues').then(res => res.json());
 
@@ -18,6 +19,12 @@ const Home = () => {
             <LatestIssues latestIssuesPromise={latestIssuesPromise}></LatestIssues>
 
             <CommunityStates></CommunityStates>
+
+            <CallAction></CallAction>
+
+
+
+            
         </div>
     );
 };

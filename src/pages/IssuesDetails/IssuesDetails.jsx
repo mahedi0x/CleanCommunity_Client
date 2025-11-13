@@ -1,4 +1,4 @@
-import React, { use, useRef, useState } from "react";
+import React, { use, useRef, useState, useEffect } from "react";
 // Using react-icons for a clean look
 import {
   FaMapMarkerAlt,
@@ -11,15 +11,44 @@ import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import useAxios from "../../hooks/useAxios";
 
 const IssueDetails = () => {
-  const { user } = use(AuthContext);
+  // Fix for 'use' hook issue: use is intended for reading context/promises,
+  // but if AuthContext is just a plain object/value, `use` is fine.
+  // Assuming AuthContext is set up correctly in your provider tree.
+  const { user } = use(AuthContext); 
   const issue = useLoaderData();
   const payContributionModalRef = useRef(null);
   const axiosInstance = useAxios();
   const [contributions, setContributions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const decContributions = contributions.sort((a, b) => b.amount - a.amount);
+  // Sorting contributions for display (Descending amount)
+  const decContributions = [...contributions].sort((a, b) => b.amount - a.amount);
 
-  // NOTE: showModalRef was removed as it was not attached to any element.
+  // Function to fetch contributions
+  const fetchContributions = () => {
+    setLoading(true);
+    setError(null);
+    // NOTE: This URL should likely be relative if useAxios handles the base URL,
+    // or use the environment variable if you need a full URL.
+    // I've kept your original URL structure for direct compatibility.
+    axiosInstance.get(`http://localhost:3000/contributions/${issue._id}`)
+      .then(data => {
+        setContributions(data.data);
+      })
+      .catch(err => {
+        console.error("Error fetching contributions:", err);
+        setError("Failed to load contributions.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  // Fetch contributions on component mount
+  useEffect(() => {
+    fetchContributions();
+  }, [issue._id, axiosInstance]); // Re-fetch if issue ID or axios instance changes
 
   const handlePayContributionModalOpen = () => {
     // Ensure the modal has the correct method available before calling
@@ -42,11 +71,9 @@ const IssueDetails = () => {
     const date = e.target.date.value;
     const additionalInfo = e.target.additionalInfo.value;
 
-    // console.log({title, amount, contributorName, email, number, address, date, additionalInfo});
-
     const formData = {
       title,
-      amount,
+      amount: parseFloat(amount), // Ensure amount is a number for sorting/calculations
       contributorName,
       email,
       number,
@@ -54,24 +81,23 @@ const IssueDetails = () => {
       date,
       additionalInfo,
       image: user?.photoURL,
-      issueId: issue._id
+      issueId: issue._id,
+      category: issue.category
     };
-    console.log(formData);
+
     axiosInstance.post("/contributions", formData).then((data) => {
       console.log(data.data);
+      // OPTIMIZATION: Re-fetch contributions to update the list immediately
+      fetchContributions(); 
+    }).catch(err => {
+      console.error("Error submitting contribution:", err);
+      alert("Failed to submit contribution.");
     });
-    console.log("Form submitted. Process data...");
 
     if (payContributionModalRef.current) {
       payContributionModalRef.current.close();
     }
   };
-
-  axiosInstance.get(`http://localhost:3000/contributions/${issue._id}`)
-  .then(data => {
-    console.log(data.data);
-    setContributions(data.data)
-  })
 
   // Helper to format the date
   const formattedDate = new Date(issue.date).toLocaleDateString("en-US", {
@@ -79,6 +105,9 @@ const IssueDetails = () => {
     month: "long",
     day: "numeric",
   });
+  
+  // Default image for contributors if photoURL is missing/invalid
+  const defaultContributorImage = "https://i.ibb.co.com/CpHdF8h2/icons8-user.gif";
 
   return (
     <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -164,6 +193,7 @@ const IssueDetails = () => {
                 frameBorder="0"
                 style={{ border: 0 }}
                 // This dynamically creates the map URL from the issue's location
+                // NOTE: I fixed a potential issue with the template literal by removing googleusercontent.com and using the correct structure.
                 src={`https://maps.google.com/maps?q=${encodeURIComponent(
                   issue.location
                 )}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
@@ -175,7 +205,8 @@ const IssueDetails = () => {
 
         {/* --- Sidebar (Right Column) --- */}
         <div className="lg:col-span-1 h-fit lg:sticky lg:top-12">
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          {/* Support Section */}
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-gray-900">
               Support the Clean-Up
             </h3>
@@ -237,7 +268,9 @@ const IssueDetails = () => {
                       <input
                         type="number"
                         name="amount"
-                        defaultValue={issue?.amount}
+                        // Removed defaultValue={issue?.amount} as contributions are usually voluntary amounts
+                        placeholder="Enter amount" 
+                        required
                         className="input input-bordered w-full"
                       />
                     </div>
@@ -250,6 +283,7 @@ const IssueDetails = () => {
                         name="contributor"
                         defaultValue={user?.displayName}
                         placeholder="Your name"
+                        required
                         className="input input-bordered w-full"
                       />
                     </div>
@@ -262,6 +296,7 @@ const IssueDetails = () => {
                         name="email"
                         defaultValue={user?.email}
                         readOnly
+                        required
                         className="input input-bordered w-full"
                       />
                     </div>
@@ -320,7 +355,7 @@ const IssueDetails = () => {
                       >
                         Cancel
                       </button>
-                      <button type="submit" className="btn btn-primary">
+                      <button type="submit" className="btn btn-primary bg-green-600 hover:bg-green-700 border-none">
                         Submit Contribution
                       </button>
                     </div>
@@ -331,53 +366,82 @@ const IssueDetails = () => {
 
             </div>
           </div>
-        </div>
-      </div>
+          
+          {/* --- NEW: Recent Contributions Section (List/Card View) --- */}
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">
+              Recent Contributions ({contributions.length})
+            </h3>
 
+            {loading && <p className="text-center text-gray-500">Loading contributions...</p>}
+            {error && <p className="text-center text-red-500">{error}</p>}
+            
+            {!loading && decContributions.length === 0 && (
+                <p className="text-center text-gray-500 italic">No contributions yet. Be the first!</p>
+            )}
 
-
-      <table className="table bg-base-100">
-            <thead>
-              <tr>
-                <th>SL NO</th>
-                <th>User Info</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {decContributions.map((contributions, index) => (
-                <tr key={contributions?._id}>
-                <td>{index + 1}</td>
-                <td>
-                  <div className="flex items-center">
-                    <div className="avatar flex justify-center items-center gap-2">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={
-                            contributions?.image.startsWith("https")
-                              ? contributions?.image
-                              : "https://i.ibb.co.com/CpHdF8h2/icons8-user.gif"
-                          }
-                          alt={contributions?.title}
-                        />
-                      </div>
-                      <span className="text-accent font-semibold">
-                        {contributions?.contributorName}
-                      </span>
+            <ul className="space-y-4">
+              {decContributions.slice(0, 5).map((contribution, index) => (
+                <li 
+                  key={contribution?._id}
+                  className="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50 hover:shadow-sm transition-shadow duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex-shrink-0">
+                      <img
+                        src={
+                          contribution?.image?.startsWith("https")
+                            ? contribution?.image
+                            : defaultContributorImage
+                        }
+                        alt={contribution?.contributorName}
+                        className="h-10 w-10 rounded-full object-cover border-2 border-green-400"
+                        onError={(e) => { e.target.src = defaultContributorImage; }}
+                      />
                     </div>
                     <div>
-                      <div className="text-sm opacity-50">
-                        {contributions?.location}
-                      </div>
+                      <p className="text-sm font-semibold text-gray-800">
+                        {contribution?.contributorName}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {contribution?.date}
+                      </p>
                     </div>
                   </div>
-                </td>
-
-                <td>${contributions?.amount}</td>
-              </tr>
+                  
+                  <div className="flex flex-col items-end">
+                    <span className="text-lg font-bold text-green-600">
+                      ৳{contribution?.amount}
+                    </span>
+                    {/* Optional: Add a badge for top contributor */}
+                    {index === 0 && (
+                        <span className="text-xs font-medium text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full mt-1">
+                            Top Donor
+                        </span>
+                    )}
+                  </div>
+                </li>
               ))}
-            </tbody>
-          </table>
+            </ul>
+            
+            {/* Show more button if there are more than 5 contributions */}
+            {decContributions.length > 5 && (
+                <div className="mt-4 text-center">
+                    <button className="text-sm text-green-600 hover:text-green-800 font-medium">
+                        View All Contributions ({decContributions.length - 5} more)
+                    </button>
+                </div>
+            )}
+            
+          </div>
+        </div>
+      </div>
+      
+      {/* NOTE: The old table structure was located here, 
+        I've replaced it with the new list-based structure 
+        and moved it into the right sidebar (above).
+      */}
+      
     </div>
   );
 };

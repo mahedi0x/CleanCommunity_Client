@@ -1,18 +1,20 @@
 import React, { use, useEffect, useState } from 'react';
 import useAxios from '../../hooks/useAxios';
 import { AuthContext } from '../../Provider/AuthProvider/AuthProvider';
+import Loading from   '../../components/Loading/Loading'
 import Table from '../../components/Table/Table';
 
 const MyContribution = () => {
     const axiosInstance = useAxios();
     const {user} = use(AuthContext);
     const [myContribution, setMyContribution] = useState([]);
+    console.log(myContribution);
     const [loading , setLoading] = useState(true);
 
     // axiosInstance.get(`my-contribution/?email=${user?.email}`)
 
     useEffect(() => {
-        axiosInstance.get(`/contributions/?email=${user?.email}`).then((data) => {
+        axiosInstance.get(`/my-contribution/?email=${user?.email}`).then((data) => {
            setMyContribution(data.data);
           setLoading(false);
         });
@@ -20,7 +22,7 @@ const MyContribution = () => {
 
 
       if(loading){
-        return <p>Loading...</p>
+        return <Loading></Loading>
       }
 
     return (

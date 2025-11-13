@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import useAxios from "../../hooks/useAxios";
 
 
@@ -28,7 +28,7 @@ const AddIssue = () => {
     axiosInstance.post("/issues", formData)
     .then(data => {
       console.log(data.data);
-      toast.success("Add Issues")
+      toast.success("Add Issues successfully!");
       e.target.reset();
     })
   };
@@ -37,7 +37,8 @@ const AddIssue = () => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-10">
+<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-10">
+        <ToastContainer position="top-center" />
       <form
         onSubmit={handleAddIssues}
         className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-3xl border border-gray-200"

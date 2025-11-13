@@ -5,12 +5,12 @@ import AllIssues from '../pages/AllIssues/AllIssues';
 import AddIssues from '../pages/AddIssues/AddIssues';
 import MyIssues from '../pages/MyIssues/MyIssues';
 import MyContribution from '../pages/MyContribution/MyContribution';
-import Profile from '../pages/Profile/Profile';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import Home from '../pages/Home/Home';
 import IssuesDetails from '../pages/IssuesDetails/IssuesDetails';
+import PrivateRoute from '../Provider/PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
     {
@@ -28,20 +28,28 @@ const router = createBrowserRouter([
             },
             {
                 path: "/add-issues",
-                element: <AddIssues></AddIssues>
+                element: <PrivateRoute>
+                    <AddIssues></AddIssues>
+                </PrivateRoute>
             },
             {
                 path: "/my-issues",
-                element: <MyIssues></MyIssues>
+                element: <PrivateRoute>
+                     <MyIssues></MyIssues>
+                </PrivateRoute>
             },
             {
                 path: "/issues-details/:id",
-                element: <IssuesDetails></IssuesDetails>,
+                element: <PrivateRoute>
+                    <IssuesDetails></IssuesDetails>,
+                </PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:3000/issues-details/${params.id}`)
             },
             {
                 path: "/my-contribution",
-                element: <MyContribution></MyContribution>
+                element: <PrivateRoute>
+                    <MyContribution></MyContribution>
+                </PrivateRoute>
             },
             {
                 path: "/login",
@@ -51,10 +59,7 @@ const router = createBrowserRouter([
                 path: "/register",
                 element: <Register></Register>
             },
-            {
-                path: "/profile",
-                element: <Profile></Profile>
-            },
+          
             {
                 path: "/*",
                 element: <NotFoundPage></NotFoundPage>

@@ -2,6 +2,9 @@ import React, { use, useEffect, useRef, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import { AuthContext } from "../../Provider/AuthProvider/AuthProvider";
 import useAxios from "../../hooks/useAxios";
+import Loading from "../../components/Loading/Loading";
+import { toast, ToastContainer } from "react-toastify";
+import Swal from "sweetalert2";
 
 const MyIssues = () => {
     const { user } = use(AuthContext); 
@@ -16,16 +19,38 @@ const MyIssues = () => {
     const UpdateModalRef = useRef(null);
 
 
-
     const handleDeleteIssue = (id) => {
-        axiosInstance.delete(`/issues/${id}`)
-        .then(data => {
-            console.log(data.data);
-            setMyIssues(prev => prev.filter(e => e._id !== id ))
-        })
-        console.log(id);
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosInstance.delete(`/issues/${id}`)
+            .then(res => {
+              console.log(res)
+              setMyIssues(prev => prev.filter(e => e._id !== id));
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your issue has been deleted.",
+                icon: "success"
+              });
+            })
+            .catch(() => {
+              Swal.fire({
+                title: "Error!",
+                text: "Failed to delete issue.",
+                icon: "error"
+              });
+            });
+        }
+      });
     };
-
+    
     useEffect(() => {
           axiosInstance.get(`/my-issues?email=${user?.email}`)
           .then(data => {
@@ -38,8 +63,8 @@ const MyIssues = () => {
 
      
 
-    if (loading) {
-        return <div> Please wait ... Loading...</div>; 
+    if(loading){
+      return <Loading></Loading>
     }
 
 
@@ -59,6 +84,7 @@ const MyIssues = () => {
         axiosInstance.patch(`/issues/${selectedIssue._id}`, formData)
           .then(data => {
             console.log(data.data);
+            toast.success("Data Update successfully!");
             setRefetch(!refetch);
             
             setLoading(false);
@@ -72,6 +98,7 @@ const MyIssues = () => {
     
     return (
     <div className="p-6 md:p-10 bg-gray-50 min-h-screen">
+       <ToastContainer position="top-center" />
       <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
         My Reported Issues
       </h1>
@@ -103,7 +130,7 @@ const MyIssues = () => {
                 <td className="px-6 py-4">{issue.category}</td>
                 <td className="px-6 py-4">{issue.location}</td>
                 <td className="px-6 py-4 ">
-                    <span className="px-3 py-1 text-xs font-semibold text-yellow-600 bg-yellow-100 rounded-xl">
+                    <span className ={`px-3 py-1 text-xs font-semibold ${issue.status === "ongoing" ? "badge badge-warning" : "badge badge-success" }  rounded-xl`} >
                     {issue.status }
                     </span>
                    </td>

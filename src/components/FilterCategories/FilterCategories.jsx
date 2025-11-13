@@ -3,7 +3,7 @@ import React from "react";
 const FilterCategories = ({ setCategory, setStatus }) => {
   return (
     <div>
-      <div className="flex justify-between flex-wrap gap-4 mb-6">
+      <div className="max-w-7xl mx-auto flex justify-between flex-wrap gap-4  mt-20">
 
         <select
           onChange={(e) => setCategory(e.target.value)}
