@@ -38,7 +38,7 @@ const CommunityStates = () => {
 
   return (
     <div className="py-10 bg-gray-100 dark:bg-green-100">
-      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white">
+      <h2 className="text-3xl font-bold text-center mb-8 dark:text-gray-700">
         Community Stats
       </h2>
 

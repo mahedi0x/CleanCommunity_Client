@@ -37,13 +37,13 @@ const AddIssue = () => {
 
 
   return (
-<div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-10">
+<div className="flex justify-center items-center min-h-screen  px-4 py-10">
         <ToastContainer position="top-center" />
       <form
         onSubmit={handleAddIssues}
-        className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-3xl border border-gray-200"
+        className=" shadow-2xl rounded-2xl p-10 w-full max-w-3xl border border-gray-200"
       >
-        <h2 className="text-4xl font-semibold text-center mb-8 text-green-800">
+        <h2 className="text-4xl font-semibold text-center mb-8 ">
            Report an Issue
         </h2>
 
@@ -51,7 +51,7 @@ const AddIssue = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Issue Title */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1 ">
               Issue Title
             </label>
             <input
@@ -86,7 +86,7 @@ const AddIssue = () => {
 
           {/* Location */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1 ">
               Location
             </label>
             <input
@@ -100,7 +100,7 @@ const AddIssue = () => {
 
           {/* Image URL */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1 ">
               Image URL
             </label>
             <input
@@ -114,7 +114,7 @@ const AddIssue = () => {
 
           {/* Amount */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1">
               Amount [Suggested Fix Budget]
             </label>
             <input
@@ -128,7 +128,7 @@ const AddIssue = () => {
 
           {/* Status */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1 ">
               Status
             </label>
             <input
@@ -136,25 +136,25 @@ const AddIssue = () => {
               name="status"
               value="ongoing"
               readOnly
-              className="w-full border rounded-lg px-3 py-2 bg-gray-100 text-gray-700"
+              className="w-full border rounded-lg px-3 py-2 "
             />
           </div>
 
           {/* Date */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">Date</label>
+            <label className="block font-medium mb-1 ">Date</label>
             <input
               type="text"
               name="date"
               value={new Date().toLocaleDateString()}
               readOnly
-              className="w-full border rounded-lg px-3 py-2 bg-gray-100 text-gray-700"
+              className="w-full border rounded-lg px-3 py-2 "
             />
           </div>
 
           {/* Email */}
           <div>
-            <label className="block font-medium mb-1 text-gray-700">
+            <label className="block font-medium mb-1 ">
               Email
             </label>
             <input
@@ -162,14 +162,14 @@ const AddIssue = () => {
               type="email"
               name="email"
               readOnly
-              className="w-full border rounded-lg px-3 py-2 bg-gray-100 text-gray-700"
+              className="w-full border rounded-lg px-3 py-2 "
             />
           </div>
         </div>
 
         {/* Description (full width) */}
         <div className="mt-6">
-          <label className="block font-medium mb-1 text-gray-700">
+          <label className="block font-medium mb-1 ">
             Description
           </label>
           <textarea
@@ -184,7 +184,7 @@ const AddIssue = () => {
         <div className="text-center mt-8">
           <button
             type="submit"
-            className="bg-green-800 w-full hover:bg-green-700 text-white font-semibold px-8 py-3 rounded-lg shadow-md"
+            className="bg-green-800 w-full hover:bg-green-700  font-semibold px-8 py-3 rounded-lg shadow-md"
           >
             Submit Issue
           </button>

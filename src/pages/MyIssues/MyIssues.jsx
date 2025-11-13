@@ -97,17 +97,17 @@ const MyIssues = () => {
     
     
     return (
-    <div className="p-6 md:p-10 bg-gray-50 min-h-screen">
+    <div className="p-6 md:p-10  min-h-screen">
        <ToastContainer position="top-center" />
-      <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-1">
+      <h1 className="text-2xl md:text-3xl font-bold  mb-1">
         My Reported Issues
       </h1>
-      <p className="text-gray-500 mb-6">
+      <p className=" mb-6">
         A list of all the cleanliness issues you have reported.
       </p>
 
-      <div className="overflow-x-auto bg-white rounded-2xl shadow-sm border border-gray-100">
-        <table className="w-full text-sm text-left text-gray-600">
+      <div className="overflow-x-auto rounded-2xl shadow-sm border ">
+        <table className="w-full text-sm text-left ">
           <thead className="text-gray-700 bg-gray-100 f">
             <tr>
               <th className="px-6 py-3 font-medium">Issue Title</th>
@@ -122,9 +122,9 @@ const MyIssues = () => {
             {myIssues.map((issue) => (
               <tr
                 key={issue._id}
-                className="border-b last:border-none hover:bg-gray-50 transition"
+                className="border-b last:border-none transition"
               >
-                <td className="px-6 py-4 font-medium text-gray-900">
+                <td className="px-6 py-4 font-medium ">
                   {issue.title}
                 </td>
                 <td className="px-6 py-4">{issue.category}</td>

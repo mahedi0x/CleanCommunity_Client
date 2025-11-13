@@ -9,7 +9,7 @@ const IssueCard = ({issue}) => {
 
 
     return (
-        <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden font-sans">
+        <div className="max-w-md mx-auto bg-white dark:bg-gray-200 rounded-xl shadow-lg overflow-hidden font-sans">
       
       <img className="w-full h-56 object-cover object-center" src={image} alt={title} />
       

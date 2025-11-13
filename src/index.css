@@ -12,3 +12,5 @@
   .rdg .rdg-row:hover {
     transition: background-color 0.2s ease-in-out;
   }
+
+  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

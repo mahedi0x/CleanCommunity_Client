@@ -110,10 +110,10 @@ const IssueDetails = () => {
   const defaultContributorImage = "https://i.ibb.co.com/CpHdF8h2/icons8-user.gif";
 
   return (
-    <div className="bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div className=" min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* --- Main Content (Left Column) --- */}
-        <div className="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 md:p-10">
+        <div className="lg:col-span-2 dark:bg-gray-300 bg-white rounded-xl shadow-lg p-6 md:p-10">
           {/* Breadcrumbs (like in the image) */}
           <p className="text-sm text-gray-500 mb-4">
             Home / Issues /{" "}
@@ -128,7 +128,7 @@ const IssueDetails = () => {
           {/* Metadata: Status, Category, and Date */}
           <div className="flex flex-wrap items-center gap-4 mt-4">
             <span
-              className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase"
+              className="inline-block  text-blue-800 text-xs font-semibold px-3 py-1 rounded-full uppercase"
               title="Status"
             >
               {issue.status}
@@ -206,7 +206,7 @@ const IssueDetails = () => {
         {/* --- Sidebar (Right Column) --- */}
         <div className="lg:col-span-1 h-fit lg:sticky lg:top-12">
           {/* Support Section */}
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <div className="bg-white dark:bg-gray-300 rounded-xl shadow-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-gray-900">
               Support the Clean-Up
             </h3>
@@ -368,7 +368,7 @@ const IssueDetails = () => {
           </div>
           
           {/* --- NEW: Recent Contributions Section (List/Card View) --- */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="bg-white dark:bg-gray-300 rounded-xl shadow-lg p-6">
             <h3 className="text-xl font-bold text-gray-900 mb-4">
               Recent Contributions ({contributions.length})
             </h3>
