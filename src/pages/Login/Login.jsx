@@ -63,6 +63,7 @@ const Login = () => {
   
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 font-sans">
+        <title>CLeanBD Login</title>
         <div className="bg-white p-8 sm:p-10 rounded-xl shadow-lg w-full max-w-xl mx-3 border border-black-100">
           
           {/* Header */}

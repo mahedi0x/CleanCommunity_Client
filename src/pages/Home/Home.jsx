@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <div>
           
-
+           <title>CLeanBD Home</title>
             <Banner></Banner>
          
             <IssueCategoryCards></IssueCategoryCards>

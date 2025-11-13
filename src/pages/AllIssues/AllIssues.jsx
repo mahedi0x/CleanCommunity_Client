@@ -32,6 +32,7 @@ const AllIssues = () => {
   console.log(allIssues);
   return (
     <div>
+        <title>CLeanBD AllIssues</title>
       <FilterCategories
         setCategory={setCategory}
         setStatus={setStatus}

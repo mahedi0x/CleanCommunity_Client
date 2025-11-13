@@ -58,16 +58,7 @@ const Register = () => {
     };
 
   
-    // const handleGoogleSignIn = () => {
-    //   createUserByGoogle()
-    //   .then(result =>{
-    //     console.log(result.user);
-    //     navigate("/");
-    //   })
-    //   .catch(error =>{
-    //     console.log(error.message);
-    //   })
-    // };
+
 
     const handleGoogleSignIn = () => {
       createUserByGoogle()
@@ -106,6 +97,7 @@ const Register = () => {
   
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100 font-sans py-20">
+        <title>CLeanBD Registration</title>
         <div className="bg-white p-4 sm:p-10 rounded-xl shadow-lg w-full max-w-xl mx-3 border border-black-50">
           
           {/* Header */}

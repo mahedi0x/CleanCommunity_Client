@@ -111,6 +111,7 @@ const IssueDetails = () => {
 
   return (
     <div className=" min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+      <title>CLeanBD IssuesDetails</title>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* --- Main Content (Left Column) --- */}
         <div className="lg:col-span-2 dark:bg-gray-300 bg-white rounded-xl shadow-lg p-6 md:p-10">

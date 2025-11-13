@@ -37,7 +37,9 @@ const AddIssue = () => {
 
 
   return (
+
 <div className="flex justify-center items-center min-h-screen  px-4 py-10">
+<title>CLeanBD AddIssues</title>
         <ToastContainer position="top-center" />
       <form
         onSubmit={handleAddIssues}
