@@ -1,16 +1,47 @@
-# React + Vite
+# 🌱 CleanBD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CleanBD is a community-driven web application that empowers citizens to report, track, and resolve local environmental issues across Bangladesh.  
+Built with **React**, **TailwindCSS/DaisyUI**, and modern libraries, it provides a polished, theme-aware UI with real-time stats and contribution tracking.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Link
 
-## React Compiler
+<!-- 👉 [View CleanBD Live]() -->
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📊 **Community Stats** – Track registered users, resolved issues, and pending reports.
+- 🗂️ **Issue Reporting** – Submit complaints with category, location, and description.
+- 🎨 **Theme-Aware UI** – Light/Dark mode support with accessible palettes.
+- 🖼️ **Interactive Cards** – Animated complaint cards with hover effects.
+- 📑 **Data Table** – Contributions displayed in a sortable grid with PDF export.
+- 👥 **Volunteer CTA** – Join clean drives and community initiatives.
+- 🔐 **Authentication** – Sign in / Register with password visibility toggle.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, TailwindCSS, DaisyUI, React Router
+- **UI Enhancements:** Slick, React Icons, Typewriter Effect, React Hot Toast
+- **Data Grid & Export:** react-data-grid, jsPDF, jspdf-autotable
+- **Backend (example):** Node.js, Express, MongoDB
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (>= 16)
+- npm or yarn
+
+### Installation
+
+```bash
+git clone https://github.com/mahedi0x/CleanCommunity_Client
+cd cleanbd
+npm install
