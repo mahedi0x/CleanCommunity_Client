@@ -5,7 +5,7 @@ import LatestIssues from '../../components/latestIssues/latestIssues';
 import CommunityStates from '../../components/CommunityStates/CommunityStates';
 import CallAction from '../../components/CallAction/CallAction';
 
-const latestIssuesPromise = fetch('http://localhost:3000/latest-issues').then(res => res.json());
+const latestIssuesPromise = fetch('https://clean-community-bd.vercel.app/latest-issues').then(res => res.json());
 
 const Home = () => {
     return (

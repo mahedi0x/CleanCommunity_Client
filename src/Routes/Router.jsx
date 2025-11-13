@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             {
                 path: "/all-issues",
                 element: <AllIssues></AllIssues>
-                // loader: () =>  fetch("http://localhost:3000/issues")
+                // loader: () =>  fetch("https://clean-community-bd.vercel.app/issues")
             },
             {
                 path: "/add-issues",
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <IssuesDetails></IssuesDetails>,
                 </PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:3000/issues-details/${params.id}`)
+                loader: ({params}) => fetch(`https://clean-community-bd.vercel.app/issues-details/${params.id}`)
             },
             {
                 path: "/my-contribution",

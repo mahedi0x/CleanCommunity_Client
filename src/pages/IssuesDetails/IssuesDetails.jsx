@@ -32,7 +32,7 @@ const IssueDetails = () => {
     // NOTE: This URL should likely be relative if useAxios handles the base URL,
     // or use the environment variable if you need a full URL.
     // I've kept your original URL structure for direct compatibility.
-    axiosInstance.get(`http://localhost:3000/contributions/${issue._id}`)
+    axiosInstance.get(`https://clean-community-bd.vercel.app/contributions/${issue._id}`)
       .then(data => {
         setContributions(data.data);
       })
