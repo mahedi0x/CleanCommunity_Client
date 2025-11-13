@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.rdg {
+    --rdg-color: #000;
+    --rdg-background-color: #fff;
+    --rdg-header-background-color: #f1f1f1;
+    --rdg-border-color: #ccc;
+    --rdg-row-hover-background-color: #e8f5e9;
+  }
+  
+  .rdg .rdg-row:hover {
+    transition: background-color 0.2s ease-in-out;
+  }

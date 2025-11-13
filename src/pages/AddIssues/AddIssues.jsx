@@ -12,7 +12,7 @@ const AddIssue = () => {
     e.preventDefault();
 
     const formData = {
-      name: e.target.title.value,
+      title: e.target.title.value,
       category: e.target.category.value,
       location: e.target.location.value,
       description: e.target.description.value,

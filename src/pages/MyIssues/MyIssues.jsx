@@ -9,6 +9,7 @@ const MyIssues = () => {
     const [loading, setLoading] = useState(true);
     const axiosInstance = useAxios();
     const [selectedIssue, setSelectedIssue] = useState([]);
+    const [refetch, setRefetch]= useState(false);
 
     // console.log(selectedIssue);
 
@@ -33,14 +34,13 @@ const MyIssues = () => {
             setLoading(false);
           })
 
-    }, [axiosInstance, user]); 
+    }, [axiosInstance, user, refetch]); 
 
      
 
     if (loading) {
         return <div> Please wait ... Loading...</div>; 
     }
-
 
 
     const handleUpdateSubmit= (e) =>{
@@ -51,20 +51,23 @@ const MyIssues = () => {
         const status = e.target.status.value;
         const category = e.target.category.value;
 
-        console.log({title, amount,description,status, category  });
+        // console.log({title, amount,description,status, category  });
 
-        // const formData = {title, amount,description,status, category  };
+        const formData = {title, amount,description,status, category  };
 
-        console.log(selectedIssue._id);
-        axiosInstance.patch(`/issues/${selectedIssue._id}`)
+        // console.log(selectedIssue._id);
+        axiosInstance.patch(`/issues/${selectedIssue._id}`, formData)
           .then(data => {
             console.log(data.data);
-            setMyIssues(data.data)
+            setRefetch(!refetch);
+            
             setLoading(false);
           })
 
     }
 
+
+    console.log(myIssues);
     
     
     return (
@@ -135,7 +138,7 @@ const MyIssues = () => {
                 type="text"
                 name="title"
                 placeholder="Title"
-                defaultValue={selectedIssue.name}
+                defaultValue={selectedIssue.title}
                 className="w-full border p-2 rounded"
               />
 
@@ -205,6 +208,7 @@ const MyIssues = () => {
                 <button
                   type="submit"
                   className="px-4 py-1 bg-blue-600 text-white rounded"
+                  onClick={() => UpdateModalRef.current.close()}
                 >
                   Save
                 </button>
