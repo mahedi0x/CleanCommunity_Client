@@ -40,7 +40,7 @@ const IssueCategoryCards = () => {
   ];
 
   return (
-    <div className="max-w-8xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-8xl mx-auto py-12 px-4 sm:px-6 lg:px-8 mt-20">
       <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
         Report an Issue
       </h2>

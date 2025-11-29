@@ -186,7 +186,7 @@ const AddIssue = () => {
         <div className="text-center mt-8">
           <button
             type="submit"
-            className="bg-green-800 w-full hover:bg-green-700  font-semibold px-8 py-3 rounded-lg shadow-md"
+            className="bg-green-800 w-full hover:bg-green-700 text-white  font-semibold px-8 py-3 rounded-lg shadow-md"
           >
             Submit Issue
           </button>

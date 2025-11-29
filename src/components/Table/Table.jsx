@@ -42,7 +42,7 @@ const Table = ({ myContribution }) => {
       <DataGrid columns={columns} rows={rows}/>
       <button
         onClick={exportToPDF}
-        className="btn btn-outline btn-primary mt-2 w-50 absolute right-0"
+        className="btn text-white bg-green-800 btn-success mt-2 w-50 absolute right-0"
       >
         Download PDF
       </button>

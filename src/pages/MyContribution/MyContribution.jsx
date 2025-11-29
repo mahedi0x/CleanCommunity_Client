@@ -29,7 +29,7 @@ const MyContribution = () => {
         <div className="min-h-screen px-5">
         <title>My Contributions</title>
         <h2 className="text-4xl font-bold my-8 px-2">
-          My <span className="text-primary">Contributions</span> (
+          My <span className="text-green-700">Contributions</span> (
           {myContribution?.length})
         </h2>
         

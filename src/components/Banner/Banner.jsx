@@ -100,7 +100,7 @@ const Carousel = () => {
               {/* Content */}
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white  p-20">
                 <h1
-                  className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight drop-shadow-lg"
+                  className="text-4xl sm:text-5xl md:text-5xl font-extrabold leading-tight drop-shadow-lg"
                   dangerouslySetInnerHTML={{ __html: slide.title }}
                 />
 
@@ -114,7 +114,7 @@ const Carousel = () => {
                     <div
                       key={boxIndex}
                       className={`${box.bgColor}  flex items-center justify-center 
-                      px-5 py-5 rounded-lg shadow-md transition-all duration-300
+                      px-5 py-3 rounded-lg shadow-md transition-all duration-300
                       hover:bg-white/80 hover:scale-105 text-black w-[200px]`}
                     >
                       <box.icon size={25} className={`mr-2 ${box.color}`} />
