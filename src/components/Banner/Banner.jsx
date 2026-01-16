@@ -1,151 +1,99 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, Navigation, Pagination, Autoplay } from 'swiper/modules';
-
-// Import Swiper styles
+import { EffectFade, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
-// Icon Imports
-import { FaCamera, FaTasks, FaCheckCircle } from 'react-icons/fa';
-
+import { FaCamera, FaTasks, FaCheckCircle, FaArrowRight } from 'react-icons/fa';
 import carousel1 from "../../assets/carousel1.jpg";
-import carousel2 from "../../assets/carousel2.jpg";
 import carousel3 from "../../assets/carousel3.jpg";
+import { Link } from 'react-router';
 
 const Carousel = () => {
   const slides = [
     {
-      title: "MAKE YOUR CITY <br /> CLEANER & SAFER",
-      description:
-        "Report local issues like overflowing garbage, broken infrastructure, or illegal dumping. Together, we can make a difference.",
-      primaryButtonText: "REPORT AN ISSUE",
-      primaryButtonLink: "/report",
-      secondaryButtonText: "HOW IT WORKS",
-      secondaryButtonLink: "/how-it-works",
-      image: carousel1,
-      imageAlt: "A clean city street with a garbage truck",
+      title: "Clean Streets,<br/><span class='text-green-500'>Bright Future.</span>",
+      description: "Join 5,000+ citizens reporting civic issues daily. Your contribution turns a report into a cleaner reality.",
+      primaryBtn: "Start Reporting",
+      secondaryBtn: "How it Works",
+      img: "https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?auto=compress&cs=tinysrgb&w=1920",
     },
     {
-      title: "YOUR VOICE, <br /> OUR PRIORITY",
-      description:
-        "Every report is a step towards a better community. Track the progress of your submissions and see real change unfold.",
-      primaryButtonText: "VIEW ALL ISSUES",
-      primaryButtonLink: "/issues",
-      secondaryButtonText: "ABOUT CLEANBD",
-      secondaryButtonLink: "/about",
-      image: carousel2,
-      imageAlt: "Community park being cleaned by volunteers",
+      title: "Your Voice Is<br/><span class='text-green-500'>The Solution.</span>",
+      description: "From overflowing bins to broken lights—don't just walk past it. Snap it, Report it, and Track the progress.",
+      primaryBtn: "View All Issues",
+      secondaryBtn: "About Us",
+      img: carousel1,
     },
     {
-      title: "JOIN THE MOVEMENT <br /> FOR A BETTER BANGLADESH",
-      description:
-        "CleanBD empowers citizens to easily report and resolve civic issues. Let's build a more sustainable and livable environment.",
-      primaryButtonText: "GET INVOLVED",
-      primaryButtonLink: "/register",
-      secondaryButtonText: "CONTACT US",
-      secondaryButtonLink: "/contact",
-      image: carousel3,
-      imageAlt: "Clean urban street with modern architecture",
-    },
-  ];
-
-  const featureBoxes = [
-    {
-      text: "Report It",
-      icon: FaCamera,
-      color: "text-black-400",
-      bgColor: "bg-white/70",
-    },
-    {
-      text: "Track It",
-      icon: FaTasks,
-      color: "text-orange-400",
-      bgColor: "bg-white/70",
-    },
-    {
-      text: "Get it Solved",
-      icon: FaCheckCircle,
-      color: "text-blue-400",
-      bgColor: "bg-white/70",
+      title: "Your Voice Is<br/><span class='text-green-500'>The Solution.</span>",
+      description: "From overflowing bins to broken lights—don't just walk past it. Snap it, Report it, and Track the progress.",
+      primaryBtn: "View All Issues",
+      secondaryBtn: "About Us",
+      img: carousel3,
     },
   ];
 
   return (
-    <div className="relative w-full h-[650px] md:h-[750px] overflow-hidden">
+    <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden">
       <Swiper
-      
-        spaceBetween={0}
-        centeredSlides={true}
-        navigation={false}
-        pagination={{ clickable: true }}
-        autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-        }}
-        modules={[Navigation, Pagination, Autoplay]}
-        className="mySwiper w-full h-full"
-        >
+        effect="fade"
+        pagination={{ clickable: true, dynamicBullets: true }}
+        autoplay={{ delay: 6000 }}
+        modules={[EffectFade, Pagination, Autoplay]}
+        className="w-full h-full"
+      >
+        {slides.map((slide, i) => (
+          <SwiperSlide key={i}>
+            <div className="relative h-full bg-cover bg-center object-scale-down " style={{ backgroundImage: `url(${slide.img})` }}>
+              {/* Overlay: Darker on left for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-900/60 to-transparent"></div>
 
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className="relative w-full h-full bg-cover bg-center flex items-center"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            >
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black opacity-50 "></div>
-
-              {/* Content */}
-              <div className="relative z-10 max-w-4xl mx-auto px-6 text-center text-white  p-20">
-                <h1
-                  className="text-4xl sm:text-5xl md:text-5xl font-extrabold leading-tight drop-shadow-lg"
-                  dangerouslySetInnerHTML={{ __html: slide.title }}
-                />
-
-                <p className="mt-6 mb-8 text-lg sm:text-xl font-light max-w-2xl mx-auto">
-                  {slide.description}
-                </p>
-
-                {/* Feature Boxes */}
-                <div className="flex flex-wrap justify-center gap-4 mb-10 mt-8 ">
-                  {featureBoxes.map((box, boxIndex) => (
-                    <div
-                      key={boxIndex}
-                      className={`${box.bgColor}  flex items-center justify-center 
-                      px-5 py-3 rounded-lg shadow-md transition-all duration-300
-                      hover:bg-white/80 hover:scale-105 text-black w-[200px]`}
-                    >
-                      <box.icon size={25} className={`mr-2 ${box.color}`} />
-                      <p className="font-semibold text-base ">{box.text}</p>
+              <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+                {/* Status Tags */}
+                <div className="flex gap-4 mb-8">
+                  {[
+                    { label: "Report", icon: FaCamera },
+                    { label: "Track", icon: FaTasks },
+                    { label: "Resolve", icon: FaCheckCircle }
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 shadow-xl">
+                      <item.icon className="text-green-400 text-xs" />
+                      <span className="text-[10px] uppercase font-black tracking-widest text-white">{item.label}</span>
                     </div>
                   ))}
                 </div>
 
-                {/* Buttons */}
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
-                  <a
-                    href={slide.primaryButtonLink}
-                    className="bg-green-600 text-white px-8 py-3 rounded-full font-semibold text-lg
-                    hover:bg-green-700 transition-all duration-300 shadow-lg"
-                  >
-                    {slide.primaryButtonText}
-                  </a>
+                {/* Content */}
+                <h1
+                  className="text-5xl md:text-8xl font-black text-white leading-[0.95] mb-6 uppercase italic tracking-tighter"
+                  dangerouslySetInnerHTML={{ __html: slide.title }}
+                />
 
-                  <a
-                    href={slide.secondaryButtonLink}
-                    className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold text-lg
-                    hover:bg-white hover:text-green-800 transition-all duration-300 shadow-lg"
-                  >
-                    {slide.secondaryButtonText}
-                  </a>
+                <p className="max-w-xl text-lg md:text-xl text-gray-300 mb-10 font-medium leading-relaxed">
+                  {slide.description}
+                </p>
+
+                {/* Actions */}
+                <div className="flex flex-wrap gap-4">
+                  <Link to="/register" className="group flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white px-8 py-4 rounded-2xl font-black uppercase tracking-wider transition-all hover:-translate-y-1 shadow-2xl shadow-green-900/20">
+                    {slide.primaryBtn}
+                    <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link to="/about" className="px-8 py-4 rounded-2xl border-2 border-white/20 text-white font-black uppercase tracking-wider hover:bg-white hover:text-slate-900 transition-all backdrop-blur-sm">
+                    {slide.secondaryBtn}
+                  </Link>
                 </div>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Custom Pagination Style */}
+      <style>{`
+        .swiper-pagination-bullet { background: white !important; opacity: 0.5; }
+        .swiper-pagination-bullet-active { background: #22c55e !important; width: 25px !important; border-radius: 4px !important; opacity: 1; }
+      `}</style>
     </div>
   );
 };

@@ -1,88 +1,88 @@
 import React from 'react';
-// Import icons from react-icons. I've chosen some suitable ones.
-// You might need to install: npm install react-icons
-import { FaTrashAlt, FaHardHat, FaTools, FaRoad } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaTrashAlt, FaHardHat, FaRoad, FaHome, FaArrowRight } from 'react-icons/fa';
 
 const IssueCategoryCards = () => {
   const categories = [
-    {
-      name: "Garbage",
-      description: "Report uncollected waste, overflowing bins, or general litter.",
-      icon: FaTrashAlt,
-      color: "text-green-600",
-      bgColor: "bg-green-50",
-      path: "/report/garbage" // Example path for navigation
-    },
-    {
-      name: "Illegal Construction",
-      description: "Report unauthorized building, encroachments, or safety violations.",
-      icon: FaHardHat, // Hardhat for construction
-      color: "text-red-600",
-      bgColor: "bg-red-50",
-      path: "/report/illegal-construction"
-    },
-    {
-      name: "Broken Public Property",
-      description: "Report damaged benches, streetlights, signs, or public facilities.",
-      icon: FaTools, // Tools for repair/maintenance
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
-      path: "/report/broken-property"
-    },
-    {
-      name: "Road Damage",
-      description: "Report potholes, cracks, uneven surfaces, or missing manholes.",
-      icon: FaRoad, // Road icon for damage
-      color: "text-yellow-600",
-      bgColor: "bg-yellow-50",
-      path: "/report/road-damage"
-    },
+    { name: "Garbage", description: "Report uncollected waste or overflowing bins.", icon: FaTrashAlt, accent: "from-green-500 to-emerald-700", path: "/report/garbage" },
+    { name: "Illegal Building", description: "Report unauthorized building or safety violations.", icon: FaHardHat, accent: "from-orange-500 to-red-600", path: "/report/illegal-construction" },
+    { name: "Public Property", description: "Report damaged benches or streetlights.", icon: FaHome, accent: "from-blue-500 to-indigo-700", path: "/report/broken-property" },
+    { name: "Road Damage", description: "Report potholes or missing manholes.", icon: FaRoad, accent: "from-yellow-500 to-amber-600", path: "/report/road-damage" },
   ];
 
-  return (
-    <div className="max-w-8xl mx-auto py-12 px-4 sm:px-6 lg:px-8 mt-20">
-      <h2 className="text-4xl font-extrabold text-gray-900 text-center mb-12">
-        Report an Issue
-      </h2>
+  // Animation variants for the container and children
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Time between each card appearing
+      },
+    },
+  };
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+  const cardVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    },
+  };
+
+  return (
+    <section className="max-w-8xl mx-auto py-24 px-6 lg:px-8 ">
+      {/* Animated Header */}
+      <motion.div 
+        initial={{ x: -50, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        className="text-left mb-16 border-l-8 border-green-600 pl-6"
+      >
+        <h2 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white uppercase italic tracking-tighter">
+          What's the <span className="text-green-600">Issue?</span>
+        </h2>
+      </motion.div>
+
+      {/* Animated Grid Container */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }} // Triggers when 20% of the grid is visible
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 2xl:mx-20"
+      >
         {categories.map((category, index) => (
-          <a
+          <motion.a
             key={index}
-            href={category.path} // Make the entire card a link
-            className={`
-              ${category.bgColor} 
-              rounded-xl shadow-md p-8 flex flex-col items-center text-center
-              hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out
-              transform
-              group // For child styling on hover
-            `}
+            href='/add-issues'
+            variants={cardVariants}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="group relative overflow-hidden bg-white py-10 dark:bg-slate-800 rounded-[2rem] p-8 border border-gray-100 dark:border-slate-700 shadow-xl flex flex-col items-start cursor-pointer"
           >
+            {/* Background Hover Glow */}
+            <div className={`absolute -right-8 -top-8 w-32 h-32 bg-gradient-to-br ${category.accent} opacity-10 rounded-full group-hover:scale-[5] transition-transform duration-700`}></div>
+
             {/* Icon */}
-            <div 
-              className={`
-                text-5xl mb-4 p-4 rounded-full
-                ${category.color} 
-                bg-white
-                group-hover:bg-opacity-80 transition-colors duration-300
-              `}
-            >
+            <div className={`relative z-10 w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br ${category.accent} text-white text-xl mb-6 group-hover:rotate-[360deg] transition-transform duration-700`}>
               <category.icon />
             </div>
 
-            {/* Category Name */}
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+            <h3 className="text-2xl font-black text-slate-800 dark:text-white uppercase italic tracking-tight mb-3">
               {category.name}
             </h3>
-
-            {/* Description */}
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 font-medium">
               {category.description}
             </p>
-          </a>
+
+            <div className="mt-10 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-green-600 group-hover:gap-4 transition-all">
+              <span>Report Now</span>
+              <FaArrowRight />
+            </div>
+          </motion.a>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </section>
   );
 };
 

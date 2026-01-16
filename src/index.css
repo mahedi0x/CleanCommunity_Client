@@ -1,16 +1,38 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-.rdg {
-    --rdg-color: #000;
-    --rdg-background-color: #fff;
-    --rdg-header-background-color: #f1f1f1;
-    --rdg-border-color: #ccc;
-    --rdg-row-hover-background-color: #e8f5e9;
-  }
+/* Custom Theme Configuration */
+:root {
+  /* Primary: Fresh Green (Cleanliness/Eco) */
+  --color-primary: #10B981; 
+  /* Secondary: Deep Teal (Trust/Stability) */
+  --color-secondary: #0F766E; 
+  /* Accent: Golden Orange (Highlights/Action) */
+  --color-accent: #F59E0B;
   
-  .rdg .rdg-row:hover {
-    transition: background-color 0.2s ease-in-out;
-  }
+  --rdg-color: #000;
+  --rdg-background-color: #fff;
+  --rdg-header-background-color: #f1f1f1;
+  --rdg-border-color: #ccc;
+  --rdg-row-hover-background-color: #e8f5e9;
+}
 
-  @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+[data-theme="dark"] {
+  --rdg-color: #fff;
+  --rdg-background-color: #1f2937;
+  --rdg-header-background-color: #374151;
+  --rdg-border-color: #4b5563;
+  --rdg-row-hover-background-color: #111827;
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-accent: var(--color-accent);
+}
+
+.rdg .rdg-row:hover {
+  transition: background-color 0.2s ease-in-out;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
